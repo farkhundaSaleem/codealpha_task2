@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Authentication System</title>
+    <style>
+       body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        button {
+            padding: 10px 20px;
+            margin: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            background-color: #4caf50;
+            color: white;
+            border-radius: 5px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        #output {
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Login Authentication System</h1>
+        <div id="output"></div>
+        <button onclick="register()">Register</button>
+        <button onclick="login()">Login</button>
+        <button onclick="redirectToSecuredPage()">Access Secured Page</button>
+    </div>
+
+    <script>
+        function redirectToSecuredPage() {
+            var username = prompt("Enter your username:");
+            if (localStorage.getItem(username)) {
+                window.location.href = "secured.html"; // Redirect to secured page
+            } else {
+                document.getElementById("output").innerHTML = "You need to login first.";
+            }
+        }
+        function register() {
+            var username = prompt("Enter your username:");
+            var password = prompt("Enter your password:");
+            localStorage.setItem(username, password);
+            alert("Registration successful!");
+        }
+
+        function login() {
+            var username = prompt("Enter your username:");
+            var password = prompt("Enter your password:");
+
+            if (localStorage.getItem(username) === password) {
+                document.getElementById("output").innerHTML = "Login successful! Welcome, " + username + "!";
+            } else {
+                document.getElementById("output").innerHTML = "Invalid username or password. Please try again.";
+            }
+        }
+    </script>
+</body>
+</html>
